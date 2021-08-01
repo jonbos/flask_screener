@@ -21,18 +21,5 @@
         <div class="flash">{{ message }}</div>
     {% endfor %}
     {% block content %}{% endblock %}
-    <div id="chart" class="chart" style="height: 300px;border: 1px solid;
-                    box-shadow: 5px 5px 5px #888888;"/>
 </section>
-<script>
-    const call_api = (ticker) => {
-        url = "/api/stock?ticker={{ ticker }}"
-        console.log(url)
-        fetch(url).then(data => data.json()).then(res => {
-            chartJson = res;
-            Plotly.newPlot('chart', chartJson, {});
-        })
-    }
-    call_api();
-</script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
