@@ -53,12 +53,3 @@ def apply_sentiment_analysis(df):
 
 def format_df_date(df):
     df['date'] = pd.to_datetime(df.date).dt.date
-
-
-# def create_plot(df):
-#     plt.figure(figsize=(10, 8))
-#     mean_df = df.groupby(['ticker', 'date']).mean()
-#     mean_df = mean_df.unstack()
-#     mean_df = mean_df.xs('compound', axis="columns").transpose()
-#     mean_df.plot(kind='bar')
-

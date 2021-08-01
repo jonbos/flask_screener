@@ -1,8 +1,8 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask
 
-from screener_app import stock
+from screener_app import stock, user
 
 
 def create_app(test_config=None):
@@ -30,4 +30,5 @@ def create_app(test_config=None):
 
     app.register_blueprint(stock.bp)
     app.register_blueprint(auth.bp)
+    app.register_blueprint(user.bp)
     return app

@@ -22,7 +22,7 @@ def register():
         elif db.execute(
                 'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
-            error = 'User % is already registered' % username
+            error = 'User %s is already registered' % username
 
         if error is None:
             db.execute('INSERT INTO user (username, password) values (?,?)',
@@ -54,7 +54,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return redirect(url_for('user.index'))
         flash(error)
     return render_template('auth/login.html')
 
@@ -62,7 +62,7 @@ def login():
 @bp.route('/logout', methods=('GET', 'POST'))
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('user.index'))
 
 
 @bp.before_app_request
