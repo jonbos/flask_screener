@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template, request
 
 from screener_app import stock
 
@@ -22,9 +22,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    def hello():
-        return "Hello, World!"
+    @app.route('/')
+    def index():
+        ticker = request.args.get('ticker', default='SPY')
+        return render_template("stocks/index.html", ticker=ticker)
 
     from . import db
     db.init_app(app)
