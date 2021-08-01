@@ -2,25 +2,52 @@
 <title>{% block title %}{% endblock %} - Blog</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma-rtl.min.css">
-<nav>
-    <h1>Stock Screener</h1>
-    <ul>
-        {% if g.user %}
-            <li><span>{{ g.user['username'] }}</span>
-            <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-                {% else %}
-            <li><a href="{{ url_for('auth.register') }}">Register</a>
-            <li><a href="{{ url_for('auth.login') }}">Log In</a>
-        {% endif %}
-    </ul>
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <h1 class="is-size-3"><strong>Sentiment Analyzer</strong></h1>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    {% if g.user %}
+                        <a href="{{ url_for('auth.logout') }}" class="button is-primary">
+                            <strong>Log Out</strong>
+                        </a>
+                        <a href="{{ url_for('user.index') }}" class="button is-light">
+                            {{ g.user['username'] }}
+                        </a>
+
+                    {% else %}
+                        <a href="{{ url_for('auth.register') }}" class="button is-primary">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a href="{{ url_for('auth.login') }}" class="button is-light">
+                            Log in
+                        </a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>
-<section class="content">
-    <header>
-        {% block header %}{% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
-</section>
+<div class="container">
+    <section class="content">
+        <header>
+            {% block header %}{% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+            <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+
+</div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>

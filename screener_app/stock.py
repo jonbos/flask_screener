@@ -3,7 +3,7 @@ import json
 import plotly as plotly
 import plotly.express as px
 import yfinance as yf
-from flask import Blueprint, render_template, request, flash
+from flask import Blueprint, render_template, request
 
 from screener_app.sentiment_analysis import scrape_tickers, format_scraped_date, create_dataframe, \
     apply_sentiment_analysis, format_df_date
@@ -34,7 +34,8 @@ def get_price_chart(st, period, interval):
     margin = range * 0.05
     max = max + margin
     min = min - margin
-    fig = px.area(df, x='Date-Time', y="Open",
+    fig = px.area(df, labels={"Open": "Price", "Date-Time": "Date"},
+                  x='Date-Time', y="Open",
                   hover_data=("Open", "Close", "Volume"),
                   range_y=(min, max), template="seaborn")
 
@@ -50,7 +51,8 @@ def get_sentiment_chart(stock):
         df = create_dataframe(parsed_data)
         apply_sentiment_analysis(df)
         format_df_date(df)
-        fig = px.bar(df, x="date", y="compound", hover_data=("headline",))
+        fig = px.bar(df, labels={"compound": "Compound Sentiment", "date": "Date"},
+                     x="date", y="compound", hover_data=("headline",), barmode="group", color="compound")
         plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         return plot_json
     except AttributeError as e:

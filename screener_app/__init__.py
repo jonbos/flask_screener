@@ -3,6 +3,7 @@ import os
 from flask import Flask
 
 from screener_app import stock, user
+from screener_app.stock import stock_api
 
 
 def create_app(test_config=None):
@@ -11,6 +12,10 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, "blog.sqlite")
     )
+
+    @app.route('/')
+    def index():
+        return stock_api()
 
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
