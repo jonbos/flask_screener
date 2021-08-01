@@ -39,11 +39,18 @@
         </select>
         <button type="submit">Get Info</button>
     </form>
-    <div id="chart" class="chart" style="height: 300px;border: 1px solid;
-                    box-shadow: 5px 5px 5px #888888;"/>
+    <div class="box">
+        <div id="stock_chart" class="chart"/>
+
+    </div>
+    <div class="box">
+        <div id="sentiment_chart" class="chart"/>
+
+    </div>
     <script>
         const load_chart = () => {
-            Plotly.newPlot('chart', JSON.parse({{plot_json | tojson}}), {});
+            Plotly.newPlot('stock_chart', JSON.parse({{plot_json | tojson}}), {});
+            Plotly.newPlot('sentiment_chart', JSON.parse({{sentiment_json | tojson}}), {});
         }
         window.onload = load_chart
     </script>

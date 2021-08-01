@@ -8,6 +8,8 @@ flask = "*"
 yfinance = "*"
 click = "*"
 plotly = "*"
+nltk = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
