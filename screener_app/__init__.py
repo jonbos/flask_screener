@@ -22,11 +22,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/')
-    def index():
-        ticker = request.args.get('ticker', default='SPY')
-        return render_template("stocks/index.html", ticker=ticker)
-
     from . import db
     db.init_app(app)
 

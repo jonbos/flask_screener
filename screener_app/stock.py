@@ -5,18 +5,18 @@ import plotly.express as px
 import yfinance as yf
 from flask import Blueprint, render_template, request
 
-bp = Blueprint('stocks', __name__, url_prefix="")
+bp = Blueprint('stocks', __name__, url_prefix="/stock")
 
 
-@bp.route("/api/stock", methods=("GET",))
+@bp.route("/", methods=("GET",))
 def stock_api():
     ticker = request.args.get('ticker', default='SPY')
     period = request.args.get('period', default='1Y')
     interval = request.args.get('interval', default='1D')
-    return gm(stock=ticker, period=period, interval=interval)
+    plot_json = get_price_chart(ticker, period, interval)
+    return render_template('stocks/info.html', plot_json=plot_json, ticker=ticker)
 
-
-def gm(stock, period, interval):
+def get_price_chart(stock, period, interval):
     st = yf.Ticker(stock)
 
     # Create a line graph
@@ -34,5 +34,5 @@ def gm(stock, period, interval):
                   range_y=(min, max), template="seaborn")
 
     # Create a JSON representation of the graph
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return graphJSON
+    plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    return plot_json
