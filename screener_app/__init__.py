@@ -26,5 +26,12 @@ def create_app(test_config=None):
     def hello():
         return "Hello, World!"
 
+    from . import db
+    db.init_app(app)
+
+    # register blueprints
+    from screener_app import stock, auth
+
     app.register_blueprint(stock.bp)
+    app.register_blueprint(auth.bp)
     return app
