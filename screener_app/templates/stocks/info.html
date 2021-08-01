@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}{{ ticker }} Performance{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form method="get">
+        <label for="ticker">Ticker</label>
+        <input type="text" id="ticker" value="{{ ticker }}" name="ticker">
+        <label for="period">Period</label>
+        <select name="period" id="period">
+            <option {{ 'selected' if period=='1d' }} value="1d">1 day</option>
+            <option {{ 'selected' if period=='5d' }} value="5d">5 days</option>
+            <option {{ 'selected' if period=='1mo' }} value="1mo">1 month</option>
+            <option {{ 'selected' if period=='3mo' }} value="3mo">3 months</option>
+            <option {{ 'selected' if period=='6mo' }} value="6mo">6 months</option>
+            <option {{ 'selected' if period=='1y' }} value="1y">1 year</option>
+            <option {{ 'selected' if period=='2y' }} value="2y">2 years</option>
+            <option {{ 'selected' if period=='5y' }} value="5y">5 years</option>
+            <option {{ 'selected' if period=='10y' }} value="10y">10 years</option>
+            <option {{ 'selected' if period=='yrd' }} value="ytd">Year to date</option>
+            <option {{ 'selected' if period=='max' }} value="max">Max</option>
+        </select>
+        <label for="interval">Interval</label>
+        <select name="interval" id="interval">
+            <option {{ 'selected' if interval == '1m' }} value="1m">1 minute</option>
+            <option {{ 'selected' if interval == '2m' }} value="2m">2 minutes</option>
+            <option {{ 'selected' if interval == '5m' }} value="5m">5 minutes</option>
+            <option {{ 'selected' if interval == '15m' }} value="15m">15 minutes</option>
+            <option {{ 'selected' if interval == '30m' }} value="30m">30 minutes</option>
+            <option {{ 'selected' if interval == '60m' }} value="60m">60 minutes</option>
+            <option {{ 'selected' if interval == '90m' }} value="90m">90 minutes</option>
+            <option {{ 'selected' if interval == '1d' }} value="1d">1 day</option>
+            <option {{ 'selected' if interval == '5d' }} value="5d">5 days</option>
+            <option {{ 'selected' if interval == '1w' }} value="1w">1 week</option>
+            <option {{ 'selected' if interval == '1mo' }} value="1m">1 month</option>
+            <option {{ 'selected' if interval == '3mo' }} value="3m">3 months</option>
+        </select>
+        <button type="submit">Get Info</button>
+    </form>
+    <div id="chart" class="chart" style="height: 300px;border: 1px solid;
+                    box-shadow: 5px 5px 5px #888888;"/>
+    <script>
+        const load_chart = () => {
+            Plotly.newPlot('chart', JSON.parse({{plot_json | tojson}}), {});
+        }
+        window.onload = load_chart
+    </script>
+{% endblock %}

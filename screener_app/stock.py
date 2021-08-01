@@ -14,7 +14,8 @@ def stock_api():
     period = request.args.get('period', default='1Y')
     interval = request.args.get('interval', default='1D')
     plot_json = get_price_chart(ticker, period, interval)
-    return render_template('stocks/info.html', plot_json=plot_json, ticker=ticker)
+    return render_template('stocks/info.html', plot_json=plot_json, ticker=ticker, period=period, interval=interval)
+
 
 def get_price_chart(stock, period, interval):
     st = yf.Ticker(stock)
