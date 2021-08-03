@@ -75,6 +75,8 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
+        g.favorites = list(map(lambda row: row['ticker'], get_db().execute('SELECT * FROM user_favorite WHERE id_user = 1').fetchall()))
+
 
 
 def login_required(view):

@@ -5,4 +5,18 @@
 {% endblock %}
 
 {% block content %}
+    <table>
+        <thead>
+        <tr>
+            <th>Stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for favorite in g.favorites %}
+            <tr>
+                <td><a href="{{ url_for('stocks.stock_api', ticker=[favorite]) }}">{{ favorite }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

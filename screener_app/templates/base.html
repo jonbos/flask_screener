@@ -2,6 +2,7 @@
 <title>{% block title %}{% endblock %} - Blog</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma-rtl.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
@@ -44,6 +45,10 @@
             {% block header %}{% endblock %}
         </header>
         {% for message in get_flashed_messages() %}
+            <div class="notification is-danger">
+                <button class="delete"></button>
+                {{ message }}
+            </div>
             <div class="flash">{{ message }}</div>
         {% endfor %}
         {% block content %}{% endblock %}
@@ -51,3 +56,14 @@
 
 </div>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+</script>

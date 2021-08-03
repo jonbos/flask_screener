@@ -1,8 +1,14 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS user_favorite;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
+);
+CREATE TABLE user_favorite (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER NOT NULL,
+    ticker TEXT NOT NULL,
+    UNIQUE(id_user,ticker)
 );

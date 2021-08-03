@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}{{ ticker }} Performance{% endblock %}</h1>
+    <div class="level">
+        <h1 class="level-left">{% block title %}{{ ticker }} Performance{% endblock %}</h1>
+        <form method="POST" action="/user/add_favorite" class="level right">
+            <input name="ticker" type="hidden" id="ticker" value="{{ ticker|upper }}">
+            <input name="user_id" type="hidden" id="user_id" value="{{ g.user['id'] }}">
+            <button type="submit">Add to favorites</button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -40,12 +47,11 @@
             </select>
             <button type="submit">Get Info</button>
         </form>
-
         <div id="stock_chart" class="chart"/>
 
     </div>
     <h1 class="is-size-4">Sentiment</h1>
-        <div id="sentiment_chart" class="chart"/>
+    <div id="sentiment_chart" class="chart"/>
 
     <script>
         const load_chart = () => {

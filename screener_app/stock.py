@@ -3,7 +3,7 @@ import json
 import plotly as plotly
 import plotly.express as px
 import yfinance as yf
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 
 from screener_app.sentiment_analysis import scrape_tickers, format_scraped_date, create_dataframe, \
     apply_sentiment_analysis, format_df_date
@@ -56,4 +56,5 @@ def get_sentiment_chart(stock):
         plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
         return plot_json
     except AttributeError as e:
+        flash(f"{stock} is not a valid ticker")
         return None
