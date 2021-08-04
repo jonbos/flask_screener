@@ -1,3 +1,6 @@
+"""
+This file contains the authentication blueprint
+"""
 import functools
 
 from flask import Blueprint, request, redirect, url_for, flash, render_template, session, g

@@ -28,6 +28,7 @@ def create_app(test_config=None):
         pass
 
     from . import db
+    # IoC
     db.init_app(app)
 
     # register blueprints
