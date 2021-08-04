@@ -1,3 +1,6 @@
+"""
+Blueprint for stock functions and views
+"""
 import json
 
 import plotly as plotly
@@ -12,7 +15,7 @@ bp = Blueprint('stocks', __name__, url_prefix="/stock")
 
 
 @bp.route("/", methods=("GET",))
-def stock_api():
+def stock_info():
     ticker = request.args.get('ticker', default='SPY')
     period = request.args.get('period', default='1Y')
     interval = request.args.get('interval', default='1D')

@@ -1,4 +1,6 @@
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+"""
+This file contains all sentiment analysis-related logic
+"""
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup

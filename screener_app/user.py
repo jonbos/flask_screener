@@ -1,3 +1,6 @@
+"""
+Blueprint for user functions and views
+"""
 from sqlite3 import IntegrityError
 
 from flask import Blueprint, render_template, request, flash, redirect, url_for
