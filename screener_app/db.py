@@ -1,3 +1,6 @@
+"""
+db connection instructions, cleanup function and initialization cli command
+"""
 import sqlite3
 
 import click

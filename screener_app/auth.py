@@ -1,3 +1,6 @@
+"""
+Blueprint for auth functions and views. It also contains decorators for enforcing login
+"""
 import functools
 
 from flask import Blueprint, request, redirect, url_for, flash, render_template, session, g

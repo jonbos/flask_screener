@@ -1,9 +1,13 @@
+"""
+App factory
+"""
+
 import os
 
 from flask import Flask
 
 from screener_app import stock, user
-from screener_app.stock import stock_api
+from screener_app.stock import stock_info
 
 
 def create_app(test_config=None):
@@ -15,7 +19,7 @@ def create_app(test_config=None):
 
     @app.route('/')
     def index():
-        return stock_api()
+        return stock_info()
 
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
