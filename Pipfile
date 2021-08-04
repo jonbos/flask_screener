@@ -10,6 +10,7 @@ click = "*"
 plotly = "*"
 nltk = "*"
 beautifulsoup4 = "*"
+pytest = "*"
 
 [dev-packages]
 
